@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Store</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pippins:wght@330;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #d1e189; /* Updated background color */
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header, .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .registration-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: block;
+            margin: 0 auto; /* Center the button */
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        #successMessage {
+            display: none;
+            color: green;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        #details {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="log">
+                <img src="LOGO.png" width="125px">
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="file:///C:/Users/202314095/Desktop/final%20project%20of%20html/index.html">Home</a></li>
+                        <li><a href="file:///C:/Users/202314095/Desktop/final%20project%20of%20html/Product.html">Products</a></li>
+                        <li><a href="file:///C:/Users/202314095/Desktop/final%20project%20of%20html/about.html">About</a></li>
+                        <li><a href="file:///C:/Users/202314095/Desktop/final%20project%20of%20html/Register.html.html">Registration</a></li>
+                        <li><a href="C:\Users\202314095\Desktop\final project of html\Contact us.html">Contact</a></li>
+                </ul>
+            </nav>
+                          <a href="file:///C:/Users/202314095/Desktop/final%20project%20of%20html/Cart2.html.html">
+            <img src="cart.png"  width="30px" height="30px">
+</a>
+            <img src="menu.png"  class="menu-icon" onclick="menutoggle()">
+        </div>  
+   
+        <div class="header">
+            <!-- Your header content here -->
+        </div>
+
+        <div class="registration-form">
+            <h2>Register</h2>
+            <form action="#" method="post" id="registrationForm">
+                <div class="form-group">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label for="region">Region:</label>
+                    <input type="text" id="region" name="region" required>
+                </div>
+                <div class="form-group">
+                    <label for="street">Street:</label>
+                    <input type="text" id="street" name="street" required>
+                </div>
+                <div class="form-group">
+                    <label for="floor">Floor:</label>
+                    <input type="text" id="floor" name="floor" required>
+                </div>
+                <div class="form-group">
+                    <label for="recipientName">Recipient's Name:</label>
+                    <input type="text" id="recipientName" name="recipientName" required>
+                </div>
+                <button type="submit" class="btn" id="registerBtn">Register</button>
+                <div id="successMessage">Your registration submitted successfully.</div>
+            </form>
+            <div id="details"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <h3 style="color:white;"> Download Our App</h3>
+                    <p> Download App for Android and ion mobile phone.</p>
+                    <div class="app-logo">
+                        <img src="app-store.png">
+                        <img src="play-store.png">
+                    </div>
+                </div>
+                <div class="footer-col-2">
+                    <img src="LOGO2.png">
+                    <p> Our purpose is to sell high quality books .</p>
+                </div>
+                <div class="footer-col-3">
+                    <h3 style="color:white;"> Follow us</h3>
+                    <ul style="list-style: none;">
+                        <li>Facebook</li>
+                        <li> Twitter</li>
+                        <li>Instagram</li>
+                        <li>YouTube</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("registrationForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            document.getElementById("successMessage").style.display = "block";
+            showDetails();
+        });
+
+        function showDetails() {
+            var detailsDiv = document.getElementById("details");
+            var form = document.getElementById("registrationForm");
+            var formData = new FormData(form);
+            var detailsHTML = "<h3>Registration Details:</h3>";
+            for (var pair of formData.entries()) {
+                detailsHTML += "<p><strong>" + pair[0] + ":</strong> " + pair[1] + "</p>";
+            }
+            detailsDiv.innerHTML = detailsHTML;
+        }
+    </script>
+</body>
+</html>

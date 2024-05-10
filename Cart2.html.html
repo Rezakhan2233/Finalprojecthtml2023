@@ -1,0 +1,211 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Store</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pippins:wght@330;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="navbar">
+        <div class="log">
+            <img src="LOGO.png" width="125px" alt="Logo">
+        </div>
+        <nav>
+            <ul id="MenuItems">
+                 <li><a href="file:///C:/Users/202314095/Desktop/final%20project%20of%20html/index.html">Home</a></li>
+                        <li><a href="file:///C:/Users/202314095/Desktop/final%20project%20of%20html/Product.html">Products</a></li>
+                        <li><a href="file:///C:/Users/202314095/Desktop/final%20project%20of%20html/about.html">About</a></li>
+                        <li><a href="file:///C:/Users/202314095/Desktop/final%20project%20of%20html/Register.html.html">Registration</a></li>
+                        <li><a href="C:\Users\202314095\Desktop\final project of html\Contact us.html">Contact</a></li>
+            </ul>
+        </nav>
+                <a href="file:///C:/Users/202314095/Desktop/final%20project%20of%20html/Cart2.html.html">
+        <img src="cart.png"  width="30px" height="30px" alt="Cart">
+</a>
+        <img src="menu.png"  class="menu-icon" onclick="menutoggle()" alt="Menu">
+    </div>
+</div>
+
+<div class="small-container cart-page">
+    <table id="cartTable">
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Subtotal</th> <!-- New column for subtotal -->
+        </tr>
+        <tbody id="cartItems"></tbody>
+    </table>
+    <div class="total-price">
+        <div>
+            <span>Subtotal:</span>
+            <span class="subtotal">0.00</span> <!-- Element to display subtotal -->
+        </div>
+        <button class="button checkout-button" onclick="checkout()">Checkout</button>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer-col-1">
+                <h3 style="color:white;">Download Our App</h3>
+                <p>Download App for Android and iOS mobile phone.</p>
+                <div class="app-logo">
+                    <img src="app-store.png" alt="App Store">
+                    <img src="play-store.png" alt="Play Store">
+                </div>
+            </div>
+            <div class="footer-col-2">
+                <img src="LOGO2.png" alt="Logo">
+                <p>Our purpose is to sell high quality books.</p>
+            </div>
+            <div class="footer-col-3">
+                <h3 style="color:white;">Follow us</h3>
+                <ul style="list-style: none;">
+                    <li>Facebook</li>
+                    <li>Twitter</li>
+                    <li>Instagram</li>
+                    <li>YouTube</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var MenuItems = document.getElementById("MenuItems");
+    MenuItems.style.maxHeight= "0px";
+    function menutoggle (){
+        if(MenuItems.style.maxHeight=="0px") {
+            MenuItems.style.maxHeight= "200px";
+        } else {
+            MenuItems.style.maxHeight= "0px";
+        }
+    }
+
+    var cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Display cart items and calculate subtotal
+    var tbody = document.getElementById('cartItems');
+    var subtotal = 0; // Initialize subtotal variable
+    cart.forEach(function(item) {
+        var row = document.createElement('tr');
+        var itemSubtotal = parseFloat(item.price); // Initialize item subtotal
+        row.innerHTML = `
+            <td>
+                <div class="cart-info">
+                    <img src="${item.picture}" alt="${item.title}">
+                    <div>
+                        <p>${item.title}</p>
+                        <small>${item.price}</small>
+                        <button onclick="removeItem(this)">Remove</button>
+                    </div>
+                </div>
+            </td>
+            <td><input type="number" value="1" onchange="updateQuantity(this, '${item.title}')"></td> <!-- Add onchange event to update quantity -->
+            <td>${item.price}</td>
+            <td class="item-subtotal">${itemSubtotal.toFixed(2)}</td> <!-- Display item subtotal -->
+        `;
+        tbody.appendChild(row);
+        subtotal += itemSubtotal; // Add item subtotal to total subtotal
+    });
+
+    // Display subtotal in the HTML
+    var subtotalElement = document.querySelector('.subtotal');
+    subtotalElement.textContent = subtotal.toFixed(2); // Display total subtotal in HTML
+
+    // Function to update quantity and subtotal when quantity changes
+    function updateQuantity(input, title) {
+        var quantity = parseInt(input.value);
+        if (isNaN(quantity) || quantity <= 0) {
+            input.value = 1;
+            quantity = 1;
+        }
+        var row = input.closest('tr');
+        var price = parseFloat(row.querySelector('small').textContent);
+        var itemSubtotal = quantity * price;
+        row.querySelector('.item-subtotal').textContent = itemSubtotal.toFixed(2);
+        updateSubtotal(); // Update subtotal when quantity changes
+    }
+
+    // Function to update subtotal
+    function updateSubtotal() {
+        var itemSubtotals = document.querySelectorAll('.item-subtotal');
+        var newSubtotal = 0;
+        itemSubtotals.forEach(function(itemSubtotal) {
+            newSubtotal += parseFloat(itemSubtotal.textContent);
+        });
+        var subtotalElement = document.querySelector('.subtotal');
+        subtotalElement.textContent = newSubtotal.toFixed(2);
+    }
+
+    function removeItem(button) {
+        var row = button.closest('tr');
+        var title = row.querySelector('p').innerText;
+
+        // Remove item from cart array
+        cart = cart.filter(function(item) {
+            return item.title !== title;
+        });
+
+        // Update cart in localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
+
+        // Remove row from table
+        row.remove();
+
+        updateSubtotal(); // Update subtotal after item removal
+    }
+
+    // Function to handle checkout
+    function checkout() {
+        // Collect checkout information
+        var address = prompt("Please enter your address:");
+        var paymentMethod = prompt("Please enter your payment method:");
+        var totalPrice = parseFloat(document.querySelector('.subtotal').textContent); // Get total subtotal as totalPrice
+        
+        // Format receipt
+        var receiptHTML = `
+            <h2>Receipt</h2>
+            <p><strong>Address:</strong> ${address}</p>
+            <p><strong>Payment Method:</strong> ${paymentMethod}</p>
+            <table>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                </tr>
+        `;
+        
+        // Add item details to receipt
+        cart.forEach(function(item) {
+            receiptHTML += `
+                <tr>
+                    <td>${item.title}</td>
+                    <td>${item.price}</td>
+                </tr>
+            `;
+        });
+        
+        // Add total price to receipt
+        receiptHTML += `
+                <tr>
+                    <td><strong>Total Price:</strong></td>
+                    <td><strong>${totalPrice.toFixed(2)}</strong></td>
+                </tr>
+            </table>
+        `;
+        
+        // Print or display receipt
+        var receiptWindow = window.open('', '_blank');
+        receiptWindow.document.write(receiptHTML);
+    }
+</script>
+
+</body>
+</html>

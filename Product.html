@@ -1,0 +1,216 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Store</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?
+                family=Pippins:wght@330;400;500;600;700&display=swap"
+          rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    
+        <div class="container">
+            <div class="navbar">
+                <div class="log">
+                    <img src="LOGO.png" width="125px">
+                </div>
+                <nav>
+                    <ul id="MenuItems">
+                         <li><a href="file:///C:/Users/202314095/Desktop/final%20project%20of%20html/index.html">Home</a></li>
+                        <li><a href="file:///C:/Users/202314095/Desktop/final%20project%20of%20html/Product.html">Products</a></li>
+                        <li><a href="file:///C:/Users/202314095/Desktop/final%20project%20of%20html/about.html">About</a></li>
+                        <li><a href="file:///C:/Users/202314095/Desktop/final%20project%20of%20html/Register.html.html">Registration</a></li>
+                        <li><a href="C:\Users\202314095\Desktop\final project of html\Contact us.html">Contact</a></li>
+                    </ul>
+                </nav
+                                     <a href="file:///C:/Users/202314095/Desktop/final%20project%20of%20html/Cart2.html.html">
+                <img src="cart.png"  width="30px" height="30px">
+                    </a>
+                
+                 <img src="menu.png"  class="menu-icon" onclick="menutoggle()">
+            </div>  
+       
+        </div>
+    
+
+    
+   
+    
+    
+    <div class="small-contanier">
+<div class="row row-2">
+<center>
+            <h2>All Products</h2>
+                                          </center> 
+        <select>
+            <option>   Default Shorting     </option>
+             <option>   Short by price    </option>
+             <option>   short by popularity     </option>
+             <option>   short by rating  </option>
+             <option>   short by sale     </option>
+   
+            </select>
+            </div>
+    
+    
+    
+        <div class="row">
+        <div class="col-4">
+        <img src="8.png">
+            <h4>HTML Book</h4>
+            <div class="rating ">
+            
+            <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-falf-o"></i>
+                <i class="fa fa-star-o" ></i>
+            </div>
+            
+                        <p> P500.00</p>
+        </div>
+            
+             <div class="col-4">
+        <img src="9.png">
+            <h4>HTML Book</h4>
+            <div class="rating ">
+            
+            <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-falf-o"></i>
+                <i class="fa fa-star-o" ></i>
+            </div>
+            
+                        <p> P500.00</p>
+        </div>
+            
+             <div class="col-4">
+        <img src="10.png">
+            <h4>HTML Book</h4>
+            <div class="rating ">
+            
+            <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-falf-o"></i>
+                <i class="fa fa-star-o" ></i>
+            </div>
+            
+                        <p> P500.00</p>
+        </div>
+             <div class="col-4">
+        <img src="11.png">
+            <h4>HTML Book</h4>
+            <div class="rating ">
+            
+            <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-falf-o"></i>
+                <i class="fa fa-star-o" ></i>
+            </div>
+            
+                        <p> P500.00</p>
+        </div>
+            
+            
+        </div>
+       <div class="page-btn">
+        
+        <span>1</span>
+           <span>2</span>
+           <span>3</span>
+           <span>4</span>
+           <span>&#8594;</span>
+           
+        
+        
+        </div>
+            
+            
+        </div>
+    
+    <!------offer------->
+    
+   
+    <!-------- testimonial ------>
+   
+    
+  
+    
+    <div class="footer">
+        <div class="container">
+        <div class="row">
+            <div class="footer-col-1">
+            <h3> Download Our App</h3>
+            <p> Download App for Android and ion mobile phone.</p>
+                <div class="app-logo">
+            <img src="app-store.png">
+                <img src="play-store.png">
+                </div>
+            </div>
+            <div class="footer-col-2">
+            <img src="LOGO2.png">
+                
+            <p> Our purpose is to sell high quality books .</p>
+            
+            </div>
+            <div class="footer-col-3">
+            <h3> Follow us</h3>
+            <ul>
+                <li>Facebook</li>
+                <li> Twitter</li>
+                <li>Instagram</li>
+                <li>YouTube</li>
+                                
+                </ul>
+            </div>
+            </div>
+        <center>
+        <p class="copyright">Copyright 2020 - Easy Tutorials </p>
+            </center>
+        </div>
+    
+    </div>
+    <script>
+    var MenuItems = document.getElementById("MenuItems");
+        MenuItems.style.maxHeight= "0px";
+        function menutoggle (){
+            
+            if(MenuItems.style.maxHeight=="0px")
+                {
+                    MenuItems.style.maxHeight= "200px";
+                }
+            else
+            {
+            MenuItems.style.maxHeight= "0px";    
+            }
+        }
+    
+    
+    </script>
+    
+    
+    
+    
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
